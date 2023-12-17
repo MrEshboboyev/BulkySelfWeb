@@ -1,4 +1,5 @@
 ﻿using BulkySelf.DataAccess.Data;
+using BulkySelf.DataAccess.Repository.IRepository;
 using BulkySelf.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,15 +7,15 @@ namespace BulkySelfWeb.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public StudentController(ApplicationDbContext db)
+        private readonly IStudentRepository _studentRepo;
+        public StudentController(IStudentRepository studentRepo)
         {
-            _db = db;
+            _studentRepo = studentRepo;
         }
 
         public IActionResult Index()
         {
-            List<Student> Students = _db.Students.ToList();
+            List<Student> Students = _studentRepo.GetAll().ToList();
             return View(Students);
         }
 
@@ -30,8 +31,8 @@ namespace BulkySelfWeb.Controllers
         {
             if(ModelState.IsValid)
             {
-                _db.Students.Add(student);
-                _db.SaveChanges();
+                _studentRepo.Add(student);
+                _studentRepo.Save();
                 TempData["success"] = "Student created successfully!";
                 return RedirectToAction("Index");
             }
@@ -48,8 +49,8 @@ namespace BulkySelfWeb.Controllers
             {
                 return NotFound();
             }
-            Student student = _db.Students.Find(id);
-            if(student == null)
+            Student student = _studentRepo.Get(u => u.Id == id);
+            if (student == null)
             {
                 return NotFound();
             }
@@ -61,8 +62,8 @@ namespace BulkySelfWeb.Controllers
         {
             if(ModelState.IsValid)
             {
-                _db.Students.Update(student);
-                _db.SaveChanges();
+                _studentRepo.Add(student);
+                _studentRepo.Save();
                 TempData["success"] = "Student updated successfully!";
                 return RedirectToAction("Index");
             }
@@ -78,7 +79,7 @@ namespace BulkySelfWeb.Controllers
             {
                 return NotFound();
             }
-            Student student = _db.Students.Find(id);
+            Student student = _studentRepo.Get(u => u.Id == id);
             if (student == null)
             {
                 return NotFound();
@@ -94,14 +95,14 @@ namespace BulkySelfWeb.Controllers
             {
                 return NotFound();
             }
-            Student student = _db.Students.Find(id);
+            Student student = _studentRepo.Get(u => u.Id == id);
             if(student == null)
             {
                 return NotFound();
             }
 
-            _db.Students.Remove(student);
-            _db.SaveChanges();
+            _studentRepo.Add(student);
+            _studentRepo.Save();
             TempData["success"] = "Student deleted successfully!";
             return RedirectToAction("Index");
         }
