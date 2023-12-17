@@ -62,7 +62,7 @@ namespace BulkySelfWeb.Controllers
         {
             if(ModelState.IsValid)
             {
-                _studentRepo.Add(student);
+                _studentRepo.Update(student);
                 _studentRepo.Save();
                 TempData["success"] = "Student updated successfully!";
                 return RedirectToAction("Index");
@@ -101,7 +101,7 @@ namespace BulkySelfWeb.Controllers
                 return NotFound();
             }
 
-            _studentRepo.Add(student);
+            _studentRepo.Remove(student);
             _studentRepo.Save();
             TempData["success"] = "Student deleted successfully!";
             return RedirectToAction("Index");
