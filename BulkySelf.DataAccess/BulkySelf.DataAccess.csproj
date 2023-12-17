@@ -19,8 +19,4 @@
     <ProjectReference Include="..\BulkySelf.Models\BulkySelf.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repository\IRepository\" />
-  </ItemGroup>
-
 </Project>
