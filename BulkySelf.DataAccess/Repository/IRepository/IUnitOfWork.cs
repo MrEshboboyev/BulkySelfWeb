@@ -8,7 +8,7 @@ namespace BulkySelf.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
     {
-        IStudentRepository StudentRepository { get; }
+        IStudentRepository Student { get; }
         void Save();
     }
 }

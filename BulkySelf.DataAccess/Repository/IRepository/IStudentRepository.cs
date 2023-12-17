@@ -10,6 +10,5 @@ namespace BulkySelf.DataAccess.Repository.IRepository
     public interface IStudentRepository : IRepository<Student>
     {
         void Update(Student obj);
-        void Save();
     }
 }

@@ -1,6 +1,5 @@
 ﻿using BulkySelf.DataAccess.Data;
 using BulkySelf.DataAccess.Repository.IRepository;
-using BulkySelf.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,18 +8,19 @@ using System.Threading.Tasks;
 
 namespace BulkySelf.DataAccess.Repository
 {
-    public class StudentRepository : Repository<Student>, IStudentRepository
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _db;
-        public StudentRepository(ApplicationDbContext db) : base(db)
+        public IStudentRepository Student { get; internal set; }
+        public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
+            Student = new StudentRepository(_db);
         }
 
-        
-        public void Update(Student obj)
+        public void Save()
         {
-            _db.Students.Update(obj);
+            _db.SaveChanges();
         }
     }
 }
