@@ -3,7 +3,7 @@ using BulkySelf.DataAccess.Repository.IRepository;
 using BulkySelf.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BulkySelfWeb.Controllers
+namespace BulkySelfWeb.Areas.Admin.Controllers
 {
     public class StudentController : Controller
     {
@@ -29,7 +29,7 @@ namespace BulkySelfWeb.Controllers
         [HttpPost]
         public IActionResult Create(Student student)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _unitOfWork.Student.Add(student);
                 _unitOfWork.Save();
@@ -60,7 +60,7 @@ namespace BulkySelfWeb.Controllers
         [HttpPost]
         public IActionResult Edit(Student student)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _unitOfWork.Student.Update(student);
                 _unitOfWork.Save();
@@ -96,7 +96,7 @@ namespace BulkySelfWeb.Controllers
                 return NotFound();
             }
             Student student = _unitOfWork.Student.Get(u => u.Id == id);
-            if(student == null)
+            if (student == null)
             {
                 return NotFound();
             }
