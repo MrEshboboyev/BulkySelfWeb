@@ -15,7 +15,7 @@ namespace BulkySelf.Models
         [Required]
         [DisplayName("Product Name")]
         [MaxLength(30)]
-        public string Name { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
         public string ISBN { get; set; }
         public string Author { get; set; }
@@ -28,7 +28,7 @@ namespace BulkySelf.Models
         [Required]
         [DisplayName("Price for 1 - 50")]
         [Range(1, 1000)]
-        public double List { get; set; }
+        public double Price { get; set; }
 
         [Required]
         [DisplayName("Price for 50 + ")]
