@@ -12,10 +12,14 @@ namespace BulkySelf.DataAccess.Repository
     {
         private readonly ApplicationDbContext _db;
         public IStudentRepository Student { get; internal set; }
+
+        public IProductRepository Product { get; internal set; }
+
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Student = new StudentRepository(_db);
+            Product = new ProductRepository(_db);
         }
 
         public void Save()
