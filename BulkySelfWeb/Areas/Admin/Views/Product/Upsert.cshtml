@@ -3,7 +3,7 @@
 <form method="post" enctype="multipart/form-data">
     <div class="border p-3 my-4">
         <div class="row pb-2">
-            <h2 class="text-primary">Create Product</h2>
+            <h2 class="text-primary">@(Model.Product.Id == 0 ? "Create" : "Update") Product</h2>
             <hr />
         </div>
 
@@ -66,7 +66,14 @@
 
         <div class="row">
             <div class="col-6 col-md-3">
-                <button type="submit" class="btn btn-primary form-control">Create</button>
+                @if(Model.Product.Id == 0)
+                {
+                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                }
             </div>
             <div class="col-6 col-md-3">
                 <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary border form-control">

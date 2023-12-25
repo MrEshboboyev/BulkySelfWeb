@@ -47,6 +47,6 @@ namespace BulkySelf.Models
         [ValidateNever]
         public Student Student { get; set; }
         [ValidateNever]
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }
