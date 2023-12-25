@@ -49,6 +49,15 @@
             <span asp-validation-for="Price100" class="text-danger"></span>
         </div>
 
+        @* Select List Item *@
+        <div class="mb-3 row p-1">
+            <select asp-for="StudentId" asp-items="ViewBag.StudentList" class="form-select p-0">
+                <option disabled selected>--Select Student--</option>
+            </select>
+            <label asp-for="StudentId" class="p-0"></label>
+            <span asp-validation-for="StudentId" class="text-danger"></span>
+        </div>
+
         <div class="row">
             <div class="col-6 col-md-3">
                 <button type="submit" class="btn btn-primary form-control">Create</button>
