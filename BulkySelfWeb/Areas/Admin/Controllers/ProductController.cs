@@ -1,6 +1,7 @@
 ﻿using BulkySelf.DataAccess.Repository.IRepository;
 using BulkySelf.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BulkySelfWeb.Areas.Admin.Controllers
 {
@@ -15,6 +16,12 @@ namespace BulkySelfWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Product> Products = _unitOfWork.Product.GetAll().ToList();
+            IEnumerable<SelectListItem> StudentList = _unitOfWork.Student
+                .GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
             return View(Products);
         }
 
