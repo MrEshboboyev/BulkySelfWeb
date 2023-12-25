@@ -51,7 +51,7 @@
 
         @* Select List Item *@
         <div class="mb-3 row p-1">
-            <select asp-for="StudentId" asp-items="ViewBag.StudentList" class="form-select p-0">
+            <select asp-for="StudentId" asp-items="@(ViewData["StudentList"] as IEnumerable<SelectListItem>)" class="form-select p-0">
                 <option disabled selected>--Select Student--</option>
             </select>
             <label asp-for="StudentId" class="p-0"></label>

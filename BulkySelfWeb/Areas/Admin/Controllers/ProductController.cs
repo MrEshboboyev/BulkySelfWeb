@@ -32,7 +32,8 @@ namespace BulkySelfWeb.Areas.Admin.Controllers
 
             // Moving a SelectListItem from one location to another
             // ViewBag is - Dictionary
-            ViewBag.StudentList = StudentList;
+            //ViewBag.StudentList = StudentList;
+            ViewData["StudentList"] = StudentList;
 
             return View();
         }
