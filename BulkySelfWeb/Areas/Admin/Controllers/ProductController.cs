@@ -152,7 +152,7 @@ namespace BulkySelfWeb.Areas.Admin.Controllers
         public IActionResult GetAll()
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties:"Student").ToList();
-            return Json(new { objProductList });
+            return Json(new { data = objProductList });
         }
 
         #endregion
