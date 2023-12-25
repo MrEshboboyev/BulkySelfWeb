@@ -4,6 +4,7 @@ using BulkySelf.Models.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.ObjectPool;
 
 namespace BulkySelfWeb.Areas.Admin.Controllers
 {
@@ -144,5 +145,16 @@ namespace BulkySelfWeb.Areas.Admin.Controllers
             TempData["success"] = "Product deleted successfully!";
             return RedirectToAction("Index");
         }
+
+        #region API CALLS
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties:"Student").ToList();
+            return Json(new { objProductList });
+        }
+
+        #endregion
     }
 }
