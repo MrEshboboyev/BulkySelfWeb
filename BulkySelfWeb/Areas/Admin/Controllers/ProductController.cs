@@ -1,5 +1,6 @@
 ﻿using BulkySelf.DataAccess.Repository.IRepository;
 using BulkySelf.Models;
+using BulkySelf.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -23,33 +24,41 @@ namespace BulkySelfWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            IEnumerable<SelectListItem> StudentList = _unitOfWork.Student
+            ProductVM productVM = new()
+            {
+                StudentList = _unitOfWork.Student
+                .GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                }),
+                Product = new Product()
+            };
+
+            return View(productVM);
+        }
+
+        [HttpPost]
+        public IActionResult Create(ProductVM productVM)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Product.Add(productVM.Product);
+                _unitOfWork.Save();
+                TempData["success"] = "Product created successfully!";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                productVM.StudentList = _unitOfWork.Student
                 .GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Name,
                     Value = u.Id.ToString()
                 });
-
-            // Moving a SelectListItem from one location to another
-            // ViewBag is - Dictionary
-            //ViewBag.StudentList = StudentList;
-            ViewData["StudentList"] = StudentList;
-
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Create(Product Product)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Product.Add(Product);
-                _unitOfWork.Save();
-                TempData["success"] = "Product created successfully!";
-                return RedirectToAction("Index");
+                return View(productVM);
             }
 
-            return View();
         }
 
 

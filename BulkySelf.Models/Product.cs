@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -43,7 +44,9 @@ namespace BulkySelf.Models
 
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
+        [ValidateNever]
         public Student Student { get; set; }
+        [ValidateNever]
         public string ImageUrl { get; set; }
     }
 }
