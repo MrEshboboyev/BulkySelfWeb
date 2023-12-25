@@ -16,12 +16,6 @@ namespace BulkySelfWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Product> Products = _unitOfWork.Product.GetAll().ToList();
-            IEnumerable<SelectListItem> StudentList = _unitOfWork.Student
-                .GetAll().Select(u => new SelectListItem
-                {
-                    Text = u.Name,
-                    Value = u.Id.ToString()
-                });
             return View(Products);
         }
 
@@ -29,6 +23,17 @@ namespace BulkySelfWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            IEnumerable<SelectListItem> StudentList = _unitOfWork.Student
+                .GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
+
+            // Moving a SelectListItem from one location to another
+            // ViewBag is - Dictionary
+            ViewBag.StudentList = StudentList;
+
             return View();
         }
 
