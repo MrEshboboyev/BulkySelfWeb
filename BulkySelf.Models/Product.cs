@@ -44,5 +44,6 @@ namespace BulkySelf.Models
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
         public Student Student { get; set; }
+        public string ImageUrl { get; set; }
     }
 }
