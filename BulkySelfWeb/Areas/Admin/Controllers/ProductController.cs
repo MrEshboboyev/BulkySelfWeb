@@ -56,23 +56,36 @@ namespace BulkySelfWeb.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(productVM.Product.Id == 0)
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
                 {
-                    string wwwRootPath = _webHostEnvironment.WebRootPath;
-                    if (file != null)
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(wwwRootPath, @"images\product");
+
+                    if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
                     {
-                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                        string productPath = Path.Combine(wwwRootPath, @"images\product");
+                        // delete the old image
+                        var oldImagePath = Path.Combine(wwwRootPath, productVM.Product.ImageUrl.TrimStart('\\'));
 
-                        using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                        if (System.IO.File.Exists(oldImagePath))
                         {
-                            file.CopyTo(fileStream);
+                            System.IO.File.Delete(oldImagePath);
                         }
-
-                        productVM.Product.ImageUrl = @"\images\product" + fileName;
                     }
+
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+
+                    productVM.Product.ImageUrl = @"\images\product\" + fileName;
+                }
+                // create
+                if (productVM.Product.Id == 0)
+                {
                     _unitOfWork.Product.Add(productVM.Product);
                 }
+                // update
                 else
                 {
                     _unitOfWork.Product.Update(productVM.Product);
