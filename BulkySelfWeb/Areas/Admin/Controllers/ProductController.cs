@@ -19,7 +19,7 @@ namespace BulkySelfWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Product> Products = _unitOfWork.Product.GetAll().ToList();
+            List<Product> Products = _unitOfWork.Product.GetAll(includeProperties:"Student").ToList();
             return View(Products);
         }
 
