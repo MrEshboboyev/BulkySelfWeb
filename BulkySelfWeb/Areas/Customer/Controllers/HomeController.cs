@@ -21,6 +21,12 @@ namespace BulkySelfWeb.Areas.Customer.Controllers
             IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Student");
             return View(productList);
         }
+        
+        public IActionResult Details(int id)
+        {
+            Product product = _unitOfWork.Product.Get(u => u.Id == id, includeProperties: "Student");
+            return View(product);
+        }
 
         public IActionResult Privacy()
         {
