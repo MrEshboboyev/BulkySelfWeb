@@ -1,11 +1,14 @@
 ﻿using BulkySelf.DataAccess.Data;
 using BulkySelf.DataAccess.Repository.IRepository;
 using BulkySelf.Models;
+using BulkySelf.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BulkySelfWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class StudentController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

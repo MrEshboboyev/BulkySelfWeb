@@ -1,6 +1,8 @@
 ﻿using BulkySelf.DataAccess.Repository.IRepository;
 using BulkySelf.Models;
 using BulkySelf.Models.ViewModels;
+using BulkySelf.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,6 +11,7 @@ using Microsoft.Extensions.ObjectPool;
 namespace BulkySelfWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
