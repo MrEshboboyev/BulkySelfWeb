@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BulkySelf.DataAccess\BulkySelf.DataAccess.csproj" />
+    <ProjectReference Include="..\BulkySelf.Utility\BulkySelf.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>
