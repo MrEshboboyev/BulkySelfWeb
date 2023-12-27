@@ -19,6 +19,7 @@ namespace BulkySelf.DataAccess.Data
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
