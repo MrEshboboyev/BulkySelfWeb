@@ -8,6 +8,7 @@ using Microsoft.Extensions.ObjectPool;
 
 namespace BulkySelfWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
